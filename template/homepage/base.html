@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Fashi Template">
+    <meta name="keywords" content="Fashi, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fashi | Template</title>
+
+    <!-- Google Font -->
+    <script src="https://use.fontawesome.com/7a10bc298b.js"></script>
+    <style>
+    .dropdown-submenu {
+      position: relative;
+    }
+
+    .dropdown-submenu .dropdown-menu {
+      top: 0;
+      left: 100%;
+      margin-top: -1px;
+    }
+    </style>
+
+    {% block cssblock %}
+
+    {% endblock %}
+
+</head>
+
+<body>
+    {% include 'homepage/header.html' %}
+
+    {% block content %}
+
+    {% endblock %}
+
+    {% include 'homepage/footer.html' %}
+
+    {%block jsblock %}
+
+    {% endblock %}
+
+</body>
+
+</html>

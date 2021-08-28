@@ -1,0 +1,529 @@
+{% extends 'homepage/base.html' %}
+
+{% load static %}
+{% load humanize %}
+    {% block cssblock %}
+
+     <!-- Css Styles -->
+
+    <link rel="stylesheet" href="{% static 'homepage/css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'homepage/css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'homepage/css/themify-icons.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'homepage/css/elegant-icons.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'homepage/css/owl.carousel.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'homepage/css/nice-select.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'homepage/css/jquery-ui.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'homepage/css/slicknav.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'homepage/css/style4.css' %}" type="text/css">
+
+
+    {% endblock %}
+
+    {% block content %}
+    <!-- Hero Section Begin -->
+    <section class="hero-section">
+        <div class="hero-items owl-carousel">
+            {% for banner in listBanner %}
+            <div class="single-hero-items set-bg" data-setbg="{% static '/img/upload/' %}{{ banner.banner_image }}">
+                <div class="container">
+
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <span>{{banner.category.name}}</span>
+                            <h1>{{banner.event}}</h1>
+                            <p>{{banner.describe}}</p>
+                            <a href="{% url 'product:showProductByCate' banner.category.id 0 %}" class="primary-btn">Xem ngay</a>
+                        </div>
+                    </div>
+                    {% if banner.discount != 0 %}
+                    <div class="off-card">
+                        <h2>Giảm giá <span>{{banner.discount}}%</span></h2>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    <!-- Hero Section End -->
+
+    <!-- Banner Section Begin -->
+    <div class="banner-section spad">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="single-banner">
+                        <img src="{% static 'img/banner_ship.png' %}" alt="">
+                        <div class="inner-text">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="single-banner">
+                        <img src="{% static 'img/banner_chatluong.png' %}" alt="">
+                        <div class="inner-text">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="single-banner">
+                        <img src="{% static 'img/banner_tuvan.jpg' %}" alt="">
+                        <div class="inner-text">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Banner Section End -->
+
+    <!-- Women Banner Section Begin -->
+    <section class="women-banner spad">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="product-large set-bg" data-setbg="{% static 'img/electric_banner.jpeg' %}">
+                        <h2 style="color:black">Điện tử, điện lạnh</h2>
+                        <a href="{% url 'product:showProductByCate' 2 0 %}" style="color:black">Xem ngay </a>
+                    </div>
+                </div>
+                <div class="col-lg-8 offset-lg-1">
+                    <div class="filter-control">
+                        <ul>
+                            <li class="active">Đồ điện tử , điện lạnh </li>
+                        </ul>
+                    </div>
+                    <div class="product-slider owl-carousel">
+                        {% for product in listCold %}
+                        <div class="product-item">
+
+                            <div class="pi-pic">
+
+                                <img src="{% static 'img/upload/'  %}{{product.product_image}}" alt="">
+                                {% if product.discount_price != 0 %}
+                                <div class="sale">Sale</div>
+                                {% endif %}
+                                <ul>
+                                    <li class="w-icon active"><a href="#" class="query-link" id="{{product.id}}"><i class="icon_bag_alt"></i></a></li>
+                                    <li class="quick-view"><a href="{% url 'product:showProduct' product.id %}">+ Xem ngay</a></li>
+                                    <li class="w-icon"><a href="{% url 'product:showProduct' product.id %}"><i class="fa fa-random"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="pi-text">
+                                <div class="catagory-name">{{product.type.name}}</div>
+                                <a href="{% url 'product:showProduct' product.id %}">
+                                    <h5>{{product.name}}</h5>
+                                </a>
+                                <div class="product-price">
+                                    {% if product.discount_price != 0 %}
+                                    {{product.discount_price|intcomma}}
+                                    <span><img src="{% static 'img/vnd.png' %}" alt=""style="width:25px;display: inline;margin-bottom:15px;"></span>
+                                    <span>{{product.price|intcomma}}</span>
+                                    {% else %}
+                                    {{product.price|intcomma}}
+                                    <span><img src="{% static 'img/vnd.png' %}" alt=""style="width:25px;display: inline;margin-bottom:15px;"></span>
+
+
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Women Banner Section End -->
+
+    <!-- Man Banner Section Begin -->
+    <section class="man-banner spad">
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-lg-8">
+                    <div class="filter-control">
+                        <ul>
+                            <li class="active">Thiết bị điện nước </li>
+                        </ul>
+                    </div>
+                    <div class="product-slider owl-carousel">
+                        {% for product in listWater %}
+                        <div class="product-item">
+                            <div class="pi-pic">
+                                <img src="{% static 'img/upload/'  %}{{product.product_image}}" alt="">
+                                {% if product.discount_price != 0 %}
+                                <div class="sale">Sale</div>
+                                {% endif %}
+                                <ul>
+                                    <li class="w-icon active"><a href="#" class="query-link" id="{{product.id}}"><i class="icon_bag_alt"></i></a></li>
+                                    <li class="quick-view"><a href="{% url 'product:showProduct' product.id %}">+ Xem ngay</a></li>
+                                    <li class="w-icon"><a href="{% url 'product:showProduct' product.id %}"><i class="fa fa-random"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="pi-text">
+                                <div class="catagory-name">{{product.type.name}}</div>
+                                <a href="{% url 'product:showProduct' product.id %}">
+                                    <h5>{{product.name}}</h5>
+                                </a>
+                                <div class="product-price">
+                                    {% if product.discount_price != 0 %}
+                                    {{product.discount_price|intcomma}}
+                                    <span><img src="{% static 'img/vnd.png' %}" alt=""style="width:25px;display: inline;margin-bottom:15px;"></span>
+                                    <span>{{product.price|intcomma}}</span>
+                                    {% else %}
+                                    {{product.price|intcomma}}
+                                    <span><img src="{% static 'img/vnd.png' %}" alt=""style="width:25px;display: inline;margin-bottom:15px;"></span>
+
+
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-lg-3 offset-lg-1">
+                    <div class="product-large set-bg m-large" data-setbg="{% static 'img/banner_locnuoc.jpeg' %}">
+                        <h2 style="color:#FFC30B">Thiết bị điện nước</h2>
+                        <a href="{% url 'product:showProductByCate' 3 0 %}" style="color:#FFC30B">Xem ngay</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Man Banner Section End -->
+    <!-- Women Banner Section Begin -->
+    <section class="women-banner spad">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="product-large set-bg" data-setbg="{% static 'img/banner_dadung.jpeg' %}">
+                        <h2 style="color:white">Thiết bị bếp</h2>
+                        <a href="{% url 'product:showProductByCate' 4 0 %}" style="color:white">Xem ngay </a>
+                    </div>
+                </div>
+                <div class="col-lg-8 offset-lg-1">
+                    <div class="filter-control">
+                        <ul>
+                            <li class="active">Đồ gia dụng, thiết bị bếp  </li>
+                        </ul>
+                    </div>
+                    <div class="product-slider owl-carousel">
+                        {% for product in listKitchen %}
+                        <div class="product-item">
+                            <div class="pi-pic">
+                                <img src="{% static 'img/upload/'  %}{{product.product_image}}" alt="">
+                                {% if product.discount_price != 0 %}
+                                <div class="sale">Sale</div>
+                                {% endif %}
+                                <ul>
+                                    <li class="w-icon active"><a href="#" class="query-link" id="{{product.id}}"><i class="icon_bag_alt"></i></a></li>
+                                    <li class="quick-view"><a href="{% url 'product:showProduct' product.id %}">+ Xem ngay</a></li>
+                                    <li class="w-icon"><a href="{% url 'product:showProduct' product.id %}"><i class="fa fa-random"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="pi-text">
+                                <div class="catagory-name">{{product.type.name}}</div>
+                                <a href="#">
+                                    <h5>{{product.name}}</h5>
+                                </a>
+                                <div class="product-price">
+                                    {% if product.discount_price != 0 %}
+                                    {{product.discount_price|intcomma}}
+                                    <span><img src="{% static 'img/vnd.png' %}" alt=""style="width:25px;display: inline;margin-bottom:15px;"></span>
+                                    <span>{{product.price|intcomma}}</span>
+                                    {% else %}
+                                    {{product.price|intcomma}}
+                                    <span><img src="{% static 'img/vnd.png' %}" alt=""style="width:25px;display: inline;margin-bottom:15px;"></span>
+
+
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Women Banner Section End -->
+        <!-- Man Banner Section Begin -->
+    <section class="man-banner spad">
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-lg-8">
+                    <div class="filter-control">
+                        <ul>
+                            <li class="active">Quần áo , phụ kiện thời trang  </li>
+                        </ul>
+                    </div>
+                    <div class="product-slider owl-carousel">
+                        {% for product in listFashion %}
+                        <div class="product-item">
+                            <div class="pi-pic">
+                                <img src="{% static 'img/upload/'  %}{{product.product_image}}" alt="">
+                                {% if product.discount_price != 0 %}
+                                <div class="sale">Sale</div>
+                                {% endif %}
+                                <ul>
+                                    <li class="w-icon active"><a href="#" class="query-link" id="{{product.id}}"><i class="icon_bag_alt"></i></a></li>
+                                    <li class="quick-view"><a href="{% url 'product:showProduct' product.id %}">+ Xem ngay</a></li>
+                                    <li class="w-icon"><a href="{% url 'product:showProduct' product.id %}"><i class="fa fa-random"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="pi-text">
+                                <div class="catagory-name">{{product.type.name}}</div>
+                                <a href="{% url 'product:showProduct' product.id %}">
+                                    <h5>{{product.name}}</h5>
+                                </a>
+                                <div class="product-price">
+                                    {% if product.discount_price != 0 %}
+                                    {{product.discount_price|intcomma}}
+                                    <span><img src="{% static 'img/vnd.png' %}" alt=""style="width:25px;display: inline;margin-bottom:15px;"></span>
+                                    <span>{{product.price|intcomma}}</span>
+                                    {% else %}
+                                    {{product.price|intcomma}}
+                                    <span><img src="{% static 'img/vnd.png' %}" alt=""style="width:25px;display: inline;margin-bottom:15px;"></span>
+
+
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-lg-3 offset-lg-1">
+                    <div class="product-large set-bg m-large" data-setbg="{% static 'img/banner_quanao.jpeg' %}">
+                        <h2 style="color:#FFC30B">Trang phục </h2>
+                        <a href="{% url 'product:showProductByCate' 5 0 %}" style="color:#FFC30B">Xem ngay</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Man Banner Section End -->
+    <!-- Women Banner Section Begin -->
+    <section class="women-banner spad">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="product-large set-bg" data-setbg="{% static 'img/banner_food.jpeg' %}">
+                        <h2 style="color:#FFC30B">Hải sản </h2>
+                        <a href="{% url 'product:showProductByCate' 6 0 %}" style="color:#FFC30B">Xem ngay </a>
+                    </div>
+                </div>
+                <div class="col-lg-8 offset-lg-1">
+                    <div class="filter-control">
+                        <ul>
+                            <li class="active">Hải sản   </li>
+                        </ul>
+                    </div>
+                    <div class="product-slider owl-carousel">
+                        {% for product in listFood %}
+                        <div class="product-item">
+                            <div class="pi-pic">
+                                <img src="{% static 'img/upload/'  %}{{product.product_image}}" alt="">
+                                {% if product.discount_price != 0 %}
+                                <div class="sale">Sale</div>
+                                {% endif %}
+                                <ul>
+                                    <li class="w-icon active"><a href="#" class="query-link" id="{{product.id}}"><i class="icon_bag_alt"></i></a></li>
+                                    <li class="quick-view"><a href="{% url 'product:showProduct' product.id %}">+ Xem ngay</a></li>
+                                    <li class="w-icon"><a href="{% url 'product:showProduct' product.id %}"><i class="fa fa-random"></i></a></li>
+                                </ul>
+                            </div>
+                            <div class="pi-text">
+                                <div class="catagory-name">{{product.type.name}}</div>
+                                <a href="{% url 'product:showProduct' product.id %}">
+                                    <h5>{{product.name}}</h5>
+                                </a>
+                                <div class="product-price">
+                                    {% if product.discount_price != 0 %}
+                                    {{product.discount_price|intcomma}}
+                                    <span><img src="{% static 'img/vnd.png' %}" alt=""style="width:25px;display: inline;margin-bottom:15px;"></span>
+                                    <span>{{product.price|intcomma}}</span>
+                                    {% else %}
+                                    {{product.price|intcomma}}
+                                    <span><img src="{% static 'img/vnd.png' %}" alt=""style="width:25px;display: inline;margin-bottom:15px;"></span>
+
+
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Women Banner Section End -->
+    <section class="latest-blog spad">
+        <div class="container">
+
+            <div class="benefit-items">
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="single-benefit">
+                            <div class="sb-icon">
+                                <img src="{% static 'img/icon-1.png' %}" alt="">
+                            </div>
+                            <div class="sb-text">
+                                <h6>Miễn phí vận chuyên </h6>
+                                <p>Cho đơn hàng nội thành hà nội</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="single-benefit">
+                            <div class="sb-icon">
+                                <img src="{% static 'img/icon-2.png' %}" alt="">
+                            </div>
+                            <div class="sb-text">
+                                <h6>Vận chuyển đúng giờ </h6>
+                                <p>Nếu không có vấn đề phát sinh </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="single-benefit">
+                            <div class="sb-icon">
+                                <img src="{% static 'img/icon-3.png' %}" alt="">
+                            </div>
+                            <div class="sb-text">
+                                <h6>Thanh toán dễ dàng</h6>
+                                <p>100% thanh toán thành công </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {%  endblock %}
+
+    {%block jsblock %}
+    <script>
+    $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+    </script>
+
+
+    <script src="{% static 'homepage/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'homepage/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'homepage/js/jquery-ui.min.js' %}"></script>
+    <script src="{% static 'homepage/js/jquery.countdown.min.js' %}"></script>
+    <script src="{% static 'homepage/js/jquery.nice-select.min.js' %}"></script>
+    <script src="{% static 'homepage/js/jquery.zoom.min.js' %}"></script>
+    <script src="{% static 'homepage/js/jquery.dd.min.js' %}"></script>
+    <script src="{% static 'homepage/js/jquery.slicknav.js' %}"></script>
+    <script src="{% static 'homepage/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'homepage/js/main3.js' %}"></script>
+    <script type="text/javascript">
+
+        jQuery(document).ready(function () {
+
+            jQuery('.delete_cartItem').on('click', function (e) {
+                e.preventDefault();
+                jQuery.ajax({
+                    url: '{% url 'product:delFromCart' %}',
+                    type: 'GET',
+
+                    data: {productid : $(this).attr('id'),
+                            cartid : {{cart.id}}
+                    },
+                    success: function (response) {
+                    var listProduct = JSON.parse(response["listProduct"]);
+                    var listCartItem = JSON.parse(response["listCartItem"]);
+                    var span = document.getElementById("number_cart_item");
+                    span.textContent = listCartItem.length ;
+                    var content = '';
+                    money= 0
+                    for (i = 0; i < listProduct.length; i++) {
+                    fieldsProduct = listProduct[i]["fields"];
+                    fieldsCartItem = listCartItem[i]["fields"];
+                    content += '<tr><td class="si-pic"><img src="{% static 'img/upload/'  %}' + fieldsProduct["product_image"] + '" alt=""></td>';
+                    content += '<td class="si-text"><div class="product-selected">';
+                    if( fieldsProduct["discount_price"] == 0 ){
+                    content += '<p>' +fieldsProduct["price"].toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) + ' x ' + fieldsCartItem["quantity"] + '</p>';
+                    money += fieldsProduct["price"] * fieldsCartItem["quantity"];
+                    }
+                    else{
+                    content += '<p>' +fieldsProduct["discount_price"].toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) + ' x ' + fieldsCartItem["quantity"] + '</p>';
+                    money += fieldsProduct["discount_price"] * fieldsCartItem["quantity"];
+                    }
+                    content += '</div><h6>' + fieldsProduct["name"] + '</h6></td>';
+                    content += '<td class="si-close"><a href="" class="delete_cartItem"  id='+listProduct[i]["pk"]+'> <i  class="ti-close"></i></a></td></tr>'
+                    }
+                    $("#listItem tbody").html(content);
+                    var totalmoney1 = document.getElementById("total_money");
+                    var totalmoney2 = document.getElementById("total_money2");
+                    totalmoney1.textContent = money.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+                    totalmoney2.textContent =  money.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+                    }
+
+                })
+            })
+        })
+
+    </script>
+
+    <script type="text/javascript">
+
+        jQuery(document).ready(function () {
+
+            jQuery('.query-link').on('click', function (e) {
+
+                e.preventDefault();
+                jQuery.ajax({
+                    url: '{% url 'product:addToCart' 1 %}',
+                    type: 'GET',
+
+                    data: {productid : $(this).attr('id'),
+                            cartid : {{cart.id}},
+                            quantity: 1,
+                    },
+                    success: function (response) {
+                    alert("Thêm thành công vào giỏ hàng ")
+                    var listProduct = JSON.parse(response["listProduct"]);
+                    var listCartItem = JSON.parse(response["listCartItem"]);
+                    var span = document.getElementById("number_cart_item");
+                    span.textContent = listCartItem.length ;
+                    var content = '';
+                    money= 0
+                    for (i = 0; i < listProduct.length; i++) {
+                    fieldsProduct = listProduct[i]["fields"];
+                    fieldsItem = listCartItem[i]["fields"];
+                    content += '<tr><td class="si-pic"><img src="{% static 'img/upload/'  %}' + fieldsProduct["product_image"] + '" alt=""></td>';
+                    content += '<td class="si-text"><div class="product-selected">';
+                    if( fieldsProduct["discount_price"] == 0 ){
+                    content += '<p>' +fieldsProduct["price"].toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) + ' x ' + fieldsItem["quantity"] + '</p>';
+                    money += fieldsProduct["price"] * fieldsItem["quantity"];
+                    }
+                    else{
+                    content += '<p>' +fieldsProduct["discount_price"].toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) + ' x ' + fieldsItem["quantity"] + '</p>';
+                    money += fieldsProduct["discount_price"] * fieldsItem["quantity"];
+                    }
+                    content += '</div><h6>' + fieldsProduct["name"] + '</h6></td>';
+                    content += '<td class="si-close"><a href="" class="delete_cartItem"  id='+listProduct[i]["pk"]+'> <i  class="ti-close"></i></a></td></tr>'                    }
+                    $("#listItem tbody").html(content);
+                    var totalmoney1 = document.getElementById("total_money");
+                    var totalmoney2 = document.getElementById("total_money2");
+                    totalmoney1.textContent = money.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+                    totalmoney2.textContent =  money.toLocaleString('it-IT', {style : 'currency', currency : 'VND'});
+                    }
+
+                })
+            })
+        })
+
+    </script>
+    {% endblock %}
+

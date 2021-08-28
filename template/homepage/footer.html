@@ -1,0 +1,63 @@
+
+{% load static %}
+
+<footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="footer-left">
+                        <div class="footer-logo">
+                            <a href="#"><img src="{% static 'homepage/img/choichoi_logo2.png' %}" alt=""></a>
+                        </div>
+                        <ul>
+                            <li>Địa chỉ : 32C the golden An Khánh, An Khánh, Hoài Đức , Hà Nội </li>
+                            <li>Số điện thoại : +84 868 381 642</li>
+                            <li>Địa chỉ email : trantiendung101999@gmail.com</li>
+                        </ul>
+                        <div class="footer-social">
+                            <a href="https://www.facebook.com/dung.trantien.94214508"><i class="fa fa-facebook"></i></a>
+                            <a href="https://www.instagram.com/ttdung2099/"><i class="fa fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 offset-lg-1">
+                    <div class="footer-widget">
+                        <ul>
+                            <li><a href="{% url 'core:checkout' %}">Thanh toán</a></li>
+                            <li><a href="{% url 'core:contact' %}">Thông tin liên hệ </a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="footer-widget">
+                        <ul>
+                            <li><a href="{% url 'core:cart' %}">Giỏ hàng</a></li>
+                            <li><a href="{% url 'product:showAllProduct' 0 %}">Cửa hàng </a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="newslatter-item">
+                        <h5>Lời tri ân </h5>
+                        <p>Cảm ơn quý khách hàng đã sử dụng dịch vụ , có khúc mắc xin liên hệ trực tiếp </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-reserved">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="copyright-text">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </div>
+                        <div class="payment-pic">
+                            <img src="img/payment-method.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>

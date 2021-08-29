@@ -156,10 +156,16 @@ def showindex(request):
     else:
         user = "false"
     if cartid != None:
-        cart = Cart.objects.get(pk=cartid)
+        cartt = Cart.objects.filter(pk=cartid)
+        if cartt.count() == 0:
+            cart = Cart()
+            cart.save()
+        else :
+            cart = cartt[0]
     else:
         cart = Cart()
         cart.save()
+
     listCartItem = cart.cartitem_set.filter(is_bought=False)
     total = 0
     for item in listCartItem:
